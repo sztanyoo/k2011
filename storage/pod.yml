@@ -1,0 +1,20 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: foo-pod
+spec:
+  containers:
+  - image: busybox
+    command:
+      - "date"
+      - ">>"
+      - "/foo/start.log"
+    name: foo-container
+    volumeMounts:
+    - mountPath: /foo
+      name: foo-data-volume
+  volumes:
+  - name: foo-data-volume
+    persistentVolumeClaim:
+      claimName: foo-claim
